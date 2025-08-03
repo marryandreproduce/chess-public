@@ -8,20 +8,34 @@
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script>
     $(document).ready(function() {
+        // Build header filter row
+        var header = $('#report thead');
+        var columns = ['Date', 'Color', 'Opponent', 'Result', 'Course', 'Chapter', 'Line', 'Match Length', 'Deviation', 'Link'];
+        var filterRow = $('<tr id="filter-row"></tr>');
+        for (var i = 0; i < columns.length; i++) {
+            filterRow.append('<th></th>');
+        }
+        header.append(filterRow);
+
         var table = $('#report').DataTable({
+            pageLength: 100,                 // ← show 100 by default
+            order: [[0, 'desc']],            // ← Date column (index 0) desc
+            lengthMenu: [[25, 50, 100, 200, -1], [25, 50, 100, 200, 'All']],
             initComplete: function () {
                 var api = this.api();
-                $('#report thead').append('<tr id="filter-row"></tr>');
                 api.columns().every(function () {
                     var column = this;
+                    // Per-column dropdown filter in the header
                     var select = $('<select><option value=""></option></select>')
-                        .appendTo($('#filter-row').append('<th></th>').children().last())
+                        .appendTo($('#filter-row th').eq(column.index()))
                         .on('change', function () {
                             var val = $.fn.dataTable.util.escapeRegex($(this).val());
                             column.search(val ? '^' + val + '$' : '', true, false).draw();
                         });
                     column.data().unique().sort().each(function (d) {
-                        select.append('<option value="' + d + '">' + d + '</option>');
+                        // Strip HTML for Link column options
+                        var text = $('<div>').html(d).text();
+                        select.append('<option value="' + text + '">' + text + '</option>');
                     });
                 });
             }
@@ -30,7 +44,7 @@
   </script>
 </head>
 <body>
-<h2>Most Recent 250 Games</h2>
+<h2>Most Recent 500 Games</h2>
 <table id="report" class="display" style="width:100%">
 <thead>
 <tr><th>Date</th><th>Color</th><th>Opponent</th><th>Result</th><th>Course</th><th>Chapter</th><th>Line</th><th>Match Length</th><th>Deviation</th><th>Link</th></tr>
@@ -3036,6 +3050,3006 @@
       <td>4</td>
       <td>You</td>
       <td><a href='https://www.chess.com/game/live/141077401504'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-25 02:12:30</td>
+      <td>Black</td>
+      <td>Miguelechavarriamaec</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>15) Third Move Alternatives</td>
+      <td>3.Qf3 #1</td>
+      <td>6</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141077185902'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-25 01:43:31</td>
+      <td>White</td>
+      <td>gibran_saputra</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141076664650'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-25 01:30:21</td>
+      <td>White</td>
+      <td>SdMG74</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 3</td>
+      <td>Reference Games</td>
+      <td>Giri vs. Carlsen, 2021</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141076349868'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-25 01:14:52</td>
+      <td>Black</td>
+      <td>xxxlhdo</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.d4</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141076184858'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-25 01:05:45</td>
+      <td>Black</td>
+      <td>dadiant</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>3) 5.Nf3 Bf5 6.Bd2 c6: 7.Ne4, 7.Nh4, and 7.Bc4</td>
+      <td>5.Nf3 Bf5 6.Bd2 c6 7.Ne4 #1</td>
+      <td>16</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141075946666'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-25 00:42:31</td>
+      <td>White</td>
+      <td>alialsaleh1001</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141075495756'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 22:37:39</td>
+      <td>White</td>
+      <td>Spyran</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Pirc with 6...Nc6 #1</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141073071888'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 21:06:09</td>
+      <td>Black</td>
+      <td>user_444447759</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>16) Second Move Alternatives</td>
+      <td>2.Nf3 - 3.Ng5 #4</td>
+      <td>11</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141070716388'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 20:48:31</td>
+      <td>White</td>
+      <td>Amin_Samurai</td>
+      <td>win</td>
+      <td>Rob Sicilian</td>
+      <td>Main Level</td>
+      <td>BD #1</td>
+      <td>10</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141070330524'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 20:38:41</td>
+      <td>Black</td>
+      <td>magonorre</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>36) 2.Nf3 Nf6 − 3rd Move Sidelines</td>
+      <td>Sidelines 2.Nf3 Nf6 3.e3 #1</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141069966432'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 19:51:17</td>
+      <td>White</td>
+      <td>zaahidakram</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>1. The Italian − Practice Your Move Orders</td>
+      <td>Black doesn't play ...a7-a6 #1</td>
+      <td>11</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141068877262'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 19:43:34</td>
+      <td>White</td>
+      <td>Ball0utz</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141068560584'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 19:35:17</td>
+      <td>Black</td>
+      <td>checkcheck223</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.Nf3</td>
+      <td>9</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141068194360'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 19:24:21</td>
+      <td>White</td>
+      <td>FabianWP</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 e5 2.Nf3 − 2nd Move Sidelines #1</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141067995364'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 19:15:45</td>
+      <td>Black</td>
+      <td>haffa1975</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>1. g3 #1</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141067538036'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 19:02:59</td>
+      <td>White</td>
+      <td>meh-ho-don</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>9</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/141067251572'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 02:28:54</td>
+      <td>Black</td>
+      <td>10Sofyan10</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/141039879554'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 02:21:21</td>
+      <td>Black</td>
+      <td>AL1-72</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.e5</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141039739878'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 02:15:11</td>
+      <td>White</td>
+      <td>AL1-72</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141039554930'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 02:05:04</td>
+      <td>Black</td>
+      <td>AL1-72</td>
+      <td>repetition</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.e5</td>
+      <td>8</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141039248598'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 01:48:19</td>
+      <td>White</td>
+      <td>srijshm</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 2...Nf6 #1</td>
+      <td>4</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141039100676'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 01:40:12</td>
+      <td>White</td>
+      <td>ginmax98</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 e5 2.Nf3 d6 The Philidor Defense #2</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141039023356'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 01:35:44</td>
+      <td>Black</td>
+      <td>mjcady</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 4.d4 Nf6 5.Nf3 #6</td>
+      <td>16</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141038757486'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 01:21:21</td>
+      <td>White</td>
+      <td>mjcady</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>1. The Italian − Practice Your Move Orders</td>
+      <td>Black doesn't play ...a7-a6 #1</td>
+      <td>13</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/141038512514'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 01:06:25</td>
+      <td>Black</td>
+      <td>bharadwajagade</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>33) London System 2.Bf4</td>
+      <td>London System 2.Bf4 c5 3.c3 #1</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141038281676'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 00:53:53</td>
+      <td>Black</td>
+      <td>kk-04tm885381elmdriveps</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Quickstarter Guide</td>
+      <td>Geller Gambit 5.e4 b5 6.e5</td>
+      <td>9</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141038041242'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 00:41:22</td>
+      <td>White</td>
+      <td>kk-04tm885381elmdriveps</td>
+      <td>insufficient</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141037742494'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-24 00:01:32</td>
+      <td>Black</td>
+      <td>moratillak</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Quickstarter Guide</td>
+      <td>Slav 2.Nf3 Nf6 3.c4 c6 4.g3 − 6.Qb3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141037193974'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 19:51:45</td>
+      <td>White</td>
+      <td>YourFavouriteGrandson</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>Italian − 3rd & 4th Move Sidelines #3</td>
+      <td>11</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141030847994'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 10:30:54</td>
+      <td>Black</td>
+      <td>HamletGasparyan</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 4.d4 Nf6 5.Nf3 #1</td>
+      <td>10</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141012434862'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 05:59:03</td>
+      <td>Black</td>
+      <td>Menaces3</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>11) 4.b4, 4.Rb1, 4.g3 and 4.Qe2</td>
+      <td>4.b4 Qxb4 5.Rb1 #1</td>
+      <td>10</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141005962080'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 05:35:57</td>
+      <td>White</td>
+      <td>Baldin2000</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>18. 1.e4 e5 2.Nf3 d6 The Philidor Defense</td>
+      <td>1.e4 e5 2.Nf3 d6 − 3...Bg4</td>
+      <td>11</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/141005621258'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 05:27:36</td>
+      <td>Black</td>
+      <td>Jagadeesh0808</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Quickstarter Guide</td>
+      <td>Slav 2.Nf3 Nf6 3.c4 c6 4.g3 − 6.Qb3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141005311776'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 05:11:36</td>
+      <td>Black</td>
+      <td>gattino150</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>2</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141005137464'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 05:02:45</td>
+      <td>White</td>
+      <td>Akash_ademane</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 3</td>
+      <td>Quickstarter Guide</td>
+      <td>Accelerated Dragon #1</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141005036738'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 04:39:09</td>
+      <td>Black</td>
+      <td>Bhatti333221</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>30) Slav 3.e3 and Others</td>
+      <td>Slav 3.Bf4 #1</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141004385510'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 04:21:12</td>
+      <td>White</td>
+      <td>Tex0storone</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>18. 1.e4 e5 2.Nf3 d6 The Philidor Defense</td>
+      <td>1.e4 e5 2.Nf3 d6 − 3...Nf6</td>
+      <td>8</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141004150390'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 04:09:37</td>
+      <td>Black</td>
+      <td>beng-beng09</td>
+      <td>checkmated</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>0</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/141003921162'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 03:57:41</td>
+      <td>White</td>
+      <td>wombatsignal</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>Italian − 3rd & 4th Move Sidelines #2</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141003769642'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 03:50:33</td>
+      <td>Black</td>
+      <td>KnightmareMoves32</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 4.d4 Nf6 5.Nf3 #1</td>
+      <td>10</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141003650376'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 03:44:11</td>
+      <td>Black</td>
+      <td>Haitian0Jack</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>16) Second Move Alternatives</td>
+      <td>2.e5 #3</td>
+      <td>7</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141003425520'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 03:32:10</td>
+      <td>White</td>
+      <td>Mi_Hir-Mk</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 2...Nf6 #1</td>
+      <td>4</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141003337046'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 03:27:26</td>
+      <td>White</td>
+      <td>gregoriogus</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 e5 2.Nf3 d6 The Philidor Defense #2</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141003206420'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 03:20:26</td>
+      <td>Black</td>
+      <td>sanskriti_pro</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.Nf3</td>
+      <td>6</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141003082058'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 03:13:48</td>
+      <td>White</td>
+      <td>Maricel_atn</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>18. 1.e4 e5 2.Nf3 d6 The Philidor Defense</td>
+      <td>1.e4 e5 2.Nf3 d6 − 3...Bg4</td>
+      <td>11</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/141002867670'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 03:02:22</td>
+      <td>White</td>
+      <td>Priyanshu1322</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>Italian − 3rd & 4th Move Sidelines #2</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141002738246'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 02:55:26</td>
+      <td>Black</td>
+      <td>Z-e-E-e-D</td>
+      <td>resigned</td>
+      <td>Scandinavian</td>
+      <td>Main Level</td>
+      <td>BD #1</td>
+      <td>8</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141002583486'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 02:46:53</td>
+      <td>White</td>
+      <td>AdyronG</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141002347104'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 02:34:29</td>
+      <td>Black</td>
+      <td>WEEDx1x</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>7) 5.Bd2 Bg4 6.f3 Bd7</td>
+      <td>5.Bd2 Bg4 6.f3 Bd7 7.f4 Qb6 8.Nf3 #1</td>
+      <td>12</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141002097836'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 02:21:02</td>
+      <td>White</td>
+      <td>FITXGIN</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Caro-Kann Defense</td>
+      <td>Caro-Kann Advance 3...Bf5 4.Nf3 e6 5.Be2 c5 with 7...Nge7</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141001876162'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 02:08:02</td>
+      <td>Black</td>
+      <td>Whitewolf900</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>15) Third Move Alternatives</td>
+      <td>3.d4 #2</td>
+      <td>8</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141001731970'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 02:01:22</td>
+      <td>Black</td>
+      <td>Fayt5711</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Introduction</td>
+      <td>Why this is a 1.d4 repertoire</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/141001437944'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 01:44:48</td>
+      <td>Black</td>
+      <td>Fullana0609</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/141001282540'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 01:36:53</td>
+      <td>White</td>
+      <td>2mal2</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>1... b6 with 3...e6</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141001067484'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 01:25:04</td>
+      <td>White</td>
+      <td>masterbet162513</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/141000924690'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-23 01:17:16</td>
+      <td>White</td>
+      <td>doopadee</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...Nf6 4.d3 d5 #1</td>
+      <td>13</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/141000865176'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 23:58:15</td>
+      <td>Black</td>
+      <td>Mayanknvashi</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.Nf3 #1</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140999212128'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 23:41:47</td>
+      <td>Black</td>
+      <td>PecaturHandal09</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140998932600'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 23:29:10</td>
+      <td>White</td>
+      <td>RoySubhasish</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 3...Qe5+ #1</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140998705618'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 23:03:02</td>
+      <td>Black</td>
+      <td>Heathydan</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Introduction</td>
+      <td>Classical Slav − Introduction</td>
+      <td>7</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140998096342'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 22:47:53</td>
+      <td>White</td>
+      <td>JohnnyBens</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140997758136'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 22:32:22</td>
+      <td>Black</td>
+      <td>BrockmannT</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>33) London System 2.Bf4</td>
+      <td>London System 2.Bf4 c5 3.c3 #1</td>
+      <td>6</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140997496236'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 22:20:18</td>
+      <td>White</td>
+      <td>Joeadey</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140996995850'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 21:58:31</td>
+      <td>White</td>
+      <td>Garcimau</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Philidor 3...Nbd7</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140996829284'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 21:52:54</td>
+      <td>Black</td>
+      <td>Beaubanum</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Introduction</td>
+      <td>Why this is a 1.d4 repertoire</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140996419932'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 21:34:04</td>
+      <td>White</td>
+      <td>arambarsoumian</td>
+      <td>timevsinsufficient</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140995881282'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 21:15:53</td>
+      <td>Black</td>
+      <td>DB092019</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140995599952'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 21:06:06</td>
+      <td>White</td>
+      <td>preiman</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>Italian − 3rd & 4th Move Sidelines #3</td>
+      <td>11</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140995390230'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 20:57:52</td>
+      <td>Black</td>
+      <td>GuilhasBaleal</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140994944186'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 20:40:09</td>
+      <td>White</td>
+      <td>nicodena21</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Caro-Kann Defense</td>
+      <td>Caro-Kann Advance 3...c5 with 5...cxd4</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140994752760'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 20:36:03</td>
+      <td>Black</td>
+      <td>henryksiarkowicz</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Quickstarter Guide</td>
+      <td>Slow Slav 3.Nc3 − 8.Bb5</td>
+      <td>7</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140994304906'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 20:20:38</td>
+      <td>White</td>
+      <td>Dannychikoyi</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140994158594'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 10:28:03</td>
+      <td>Black</td>
+      <td>zaglis</td>
+      <td>win</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>0</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140974299902'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 02:37:21</td>
+      <td>Black</td>
+      <td>Panderson001</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Quickstarter Guide</td>
+      <td>Slav 2.Nf3 Nf6 3.c4 c6 4.g3 − 6.Qb3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140964409064'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 02:13:04</td>
+      <td>White</td>
+      <td>SDNMe</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>16) Black's Early Alternatives: 1...b6</td>
+      <td>1... b6 with 3...Nf6 #1</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140963813184'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 02:00:15</td>
+      <td>White</td>
+      <td>SFTime</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 e5 2.Nf3 d6 The Philidor Defense #2</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140963596410'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 01:51:41</td>
+      <td>Black</td>
+      <td>pedro4500</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140963393646'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 01:40:16</td>
+      <td>White</td>
+      <td>MatthewFish9</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140963310832'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 01:35:22</td>
+      <td>Black</td>
+      <td>sidh0</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Introduction</td>
+      <td>Classical Slav − Introduction</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140963147484'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 01:27:36</td>
+      <td>White</td>
+      <td>Karloss63</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>1. The Italian − Practice Your Move Orders</td>
+      <td>Black doesn't play ...a7-a6 #2</td>
+      <td>12</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140962999050'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 01:19:34</td>
+      <td>Black</td>
+      <td>SWAROG1977</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>Reti vs. Wannabe Reverse Budapest #1</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140962740710'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 01:05:33</td>
+      <td>Black</td>
+      <td>cosmoplayzgames</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140962619386'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-22 00:57:02</td>
+      <td>White</td>
+      <td>AK052893</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140962520232'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 20:24:54</td>
+      <td>Black</td>
+      <td>Bill64K</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>30) Slav 3.e3 and Others</td>
+      <td>Slav 3.Nc3 Nf6 4.Bg5</td>
+      <td>8</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140956066978'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 20:12:52</td>
+      <td>White</td>
+      <td>carlosfabris</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>Italian − 3rd & 4th Move Sidelines #2</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140955679602'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 19:58:05</td>
+      <td>White</td>
+      <td>owen4dye</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140955342374'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 19:49:22</td>
+      <td>White</td>
+      <td>Qdog111</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>18. 1.e4 e5 2.Nf3 d6 The Philidor Defense</td>
+      <td>1.e4 e5 2.Nf3 d6 − 3...Bg4</td>
+      <td>11</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140955070766'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 19:42:23</td>
+      <td>Black</td>
+      <td>Qdog111</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>The Bird #1</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140954944090'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 19:12:06</td>
+      <td>Black</td>
+      <td>leonelarieltorres</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Quickstarter Guide</td>
+      <td>Slav 2.Nf3 Nf6 3.c4 c6 4.g3 − 6.Qb3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140953904574'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 19:05:38</td>
+      <td>White</td>
+      <td>leonelarieltorres</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>Italian − 3rd & 4th Move Sidelines #1</td>
+      <td>15</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140953694240'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 18:58:18</td>
+      <td>Black</td>
+      <td>allknowingdurham</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140953171204'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 18:42:34</td>
+      <td>White</td>
+      <td>hyderarastu9</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Modern with 3...d6</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140952607962'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 18:25:54</td>
+      <td>Black</td>
+      <td>onkarkher</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>33) London System 2.Bf4</td>
+      <td>London System 2.Bf4 c5 3.c3 #1</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140952126392'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 17:57:08</td>
+      <td>White</td>
+      <td>Ali-Abd92</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>Italian − 3rd & 4th Move Sidelines #1</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140951475098'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 17:51:18</td>
+      <td>Black</td>
+      <td>S7EVENS7EVEN</td>
+      <td>win</td>
+      <td>Scandinavian</td>
+      <td>Main Level</td>
+      <td>BD #1</td>
+      <td>10</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140951142196'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 17:42:31</td>
+      <td>Black</td>
+      <td>PaulFnnr</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140950990518'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 17:34:52</td>
+      <td>Black</td>
+      <td>mkn3rafsh</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>40) 2nd Move Sidelines</td>
+      <td>Sidelines 2.e3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140950472884'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 03:12:13</td>
+      <td>White</td>
+      <td>MOHIT94306</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...Be7</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140927272530'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 03:08:55</td>
+      <td>White</td>
+      <td>jr46e84u8</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>1...Nc6 with 2...d6</td>
+      <td>2</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140927217794'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 03:05:27</td>
+      <td>White</td>
+      <td>pr1nceNN</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>15. Petroff 3.d4 − 3rd Move Sidelines</td>
+      <td>Petroff 3.d4 exd4 #1</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140927090584'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 02:59:31</td>
+      <td>Black</td>
+      <td>craigtebeau</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Quickstarter Guide</td>
+      <td>Slav 2.Nf3 Nf6 3.c4 c6 4.g3 − 6.Qb3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140926944746'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 02:50:02</td>
+      <td>Black</td>
+      <td>weshy</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140926793362'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 02:41:39</td>
+      <td>White</td>
+      <td>kjcali9166</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...Bc5 4.c3 d6</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140926682914'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 02:33:50</td>
+      <td>White</td>
+      <td>mrhf_1995</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140926405500'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 02:21:26</td>
+      <td>White</td>
+      <td>manta04</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140926336508'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 02:17:23</td>
+      <td>Black</td>
+      <td>Cymond326</td>
+      <td>agreed</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140926201248'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 02:03:10</td>
+      <td>White</td>
+      <td>Thiagomagaff</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140925819204'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 01:48:18</td>
+      <td>Black</td>
+      <td>Thiagomagaff</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>16) Second Move Alternatives</td>
+      <td>2.e5 #1</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140925691908'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 01:41:05</td>
+      <td>White</td>
+      <td>Thiagomagaff</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140925499306'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 01:24:42</td>
+      <td>White</td>
+      <td>Carlytus</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: French Defense</td>
+      <td>French Advance 6.a3 Bd7</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140925174794'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-21 01:10:16</td>
+      <td>Black</td>
+      <td>SHxXxSH</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.e5</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140924798250'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-19 02:31:15</td>
+      <td>White</td>
+      <td>sacrifice-to-resign</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: French Defense</td>
+      <td>French Advance 4...Qb6/5...Bd7</td>
+      <td>8</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140855187074'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-19 02:17:59</td>
+      <td>Black</td>
+      <td>nliebenow</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>Reti vs. Wannabe Reverse Budapest #1</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140854966652'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 03:15:35</td>
+      <td>Black</td>
+      <td>kbk3</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>6) 5.Bd2 Bg4 (6.Nf3 & 6.Be2)</td>
+      <td>5.Bd2 Bg4 6.Be2 #2</td>
+      <td>14</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140819367096'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 02:56:24</td>
+      <td>White</td>
+      <td>The_User_COOKIE</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 3</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>2</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140818967794'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 02:44:30</td>
+      <td>Black</td>
+      <td>guntur123466</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>1. g3 #1</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140818693404'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 02:34:21</td>
+      <td>White</td>
+      <td>Jafarxjxj</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 e5 2.Nf3 d6 The Philidor Defense #2</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140818408124'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 02:18:40</td>
+      <td>White</td>
+      <td>thumay91</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>1. The Italian − Practice Your Move Orders</td>
+      <td>Black doesn't play ...a7-a6 #2</td>
+      <td>13</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140818179362'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 01:57:05</td>
+      <td>White</td>
+      <td>chandimaybgmailcom</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Scandinavian with 3...Qd8</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140817767806'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 01:42:32</td>
+      <td>Black</td>
+      <td>darktheknight7</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140817546708'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 01:30:45</td>
+      <td>White</td>
+      <td>MSL666</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 2...Nf6 #1</td>
+      <td>4</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140817195446'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 01:11:02</td>
+      <td>Black</td>
+      <td>OmarYepes</td>
+      <td>resigned</td>
+      <td>Scandinavian</td>
+      <td>Main Level</td>
+      <td>BD #1</td>
+      <td>10</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140817012198'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 00:59:18</td>
+      <td>Black</td>
+      <td>aernestoc</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>30) Slav 3.e3 and Others</td>
+      <td>Slav 3.Bf4 #1</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140816882814'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 00:52:16</td>
+      <td>Black</td>
+      <td>Ebiskotech</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Model Games</td>
+      <td>Demuth, Markus vs. Miroshnichenko, Evgenij (Leros Artemis Cup, 2009)</td>
+      <td>2</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140816707116'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 00:41:37</td>
+      <td>White</td>
+      <td>JabhiAbhi</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140816312780'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 00:21:35</td>
+      <td>White</td>
+      <td>eddiesuxballz</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Caro-Kann Defense</td>
+      <td>Caro-Kann Advance 3...c5 with 5...cxd4</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140816177208'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-18 00:13:42</td>
+      <td>Black</td>
+      <td>AbdelrahmanSayed1990</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.Nf3</td>
+      <td>6</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140816140322'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-17 22:10:17</td>
+      <td>Black</td>
+      <td>suvemavi</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.d3</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140813415402'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-16 02:32:29</td>
+      <td>Black</td>
+      <td>gran-12</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.d3 dxe4 3.dxe4</td>
+      <td>7</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140744149180'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-16 02:18:52</td>
+      <td>White</td>
+      <td>Hesamq</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140743915712'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-16 01:53:11</td>
+      <td>Black</td>
+      <td>Kpop456</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Quickstarter Guide</td>
+      <td>Slow Slav 3.Nc3 − 8.Bb5</td>
+      <td>6</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140743592748'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-14 01:39:23</td>
+      <td>White</td>
+      <td>Grejferer</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140668589622'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-14 01:24:08</td>
+      <td>Black</td>
+      <td>bobbu43</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.e5</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140668420488'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-14 01:07:44</td>
+      <td>White</td>
+      <td>NjMag</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140668121064'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-14 00:53:45</td>
+      <td>White</td>
+      <td>Velinto</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Caro-Kann Defense</td>
+      <td>Caro-Kann Advance 3...c5 with 5...cxd4</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140667788244'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-14 00:34:26</td>
+      <td>Black</td>
+      <td>DenisZubo</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140667505594'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-14 00:18:07</td>
+      <td>Black</td>
+      <td>didyreads</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 4.d4 Nf6 5.Bc4 Bg4 6.Nge2</td>
+      <td>9</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140667282318'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 19:46:03</td>
+      <td>White</td>
+      <td>lanceonthesun</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 e5 2.Nf3 d6 The Philidor Defense 1#</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140660906070'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 19:33:21</td>
+      <td>White</td>
+      <td>benleviag6</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140660820018'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 19:28:58</td>
+      <td>Black</td>
+      <td>selenophile_id</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.e5</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140660489722'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 19:19:47</td>
+      <td>Black</td>
+      <td>AlexeyDob</td>
+      <td>resigned</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>0</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140660405302'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 19:16:24</td>
+      <td>White</td>
+      <td>DerekMooney69</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140660020610'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 19:01:04</td>
+      <td>Black</td>
+      <td>Ran50</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.d3</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140659450352'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 18:44:25</td>
+      <td>White</td>
+      <td>Ran50</td>
+      <td>timeout</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 3</td>
+      <td>Quickstarter Guide</td>
+      <td>Kan Sicilian</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140658913858'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 18:13:08</td>
+      <td>Black</td>
+      <td>enzo342147</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 4.Bc4</td>
+      <td>9</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140658260848'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 18:04:53</td>
+      <td>White</td>
+      <td>fleo37</td>
+      <td>timeout</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: French Defense</td>
+      <td>French Advance 6.a3 Bd7</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140657655960'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 17:42:25</td>
+      <td>Black</td>
+      <td>jlrioux</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>Reti vs. Wannabe Reverse Budapest #1</td>
+      <td>2</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140657336008'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 17:36:33</td>
+      <td>White</td>
+      <td>jlrioux</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 3</td>
+      <td>Quickstarter Guide</td>
+      <td>Kan Sicilian</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140656879276'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 17:22:16</td>
+      <td>Black</td>
+      <td>kdnhxhagvadvnsuhdsnhfimfb</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>9) 5.Bd3 and 5.a3</td>
+      <td>5.Bd3 #1</td>
+      <td>9</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140656776426'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 16:15:28</td>
+      <td>White</td>
+      <td>Powerhousef</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Scandinavian with 3...Qd6 #1</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140654369670'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 16:05:17</td>
+      <td>Black</td>
+      <td>sadiodado</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>2</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140654172434'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 15:58:39</td>
+      <td>White</td>
+      <td>POV-Sushi</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>18. 1.e4 e5 2.Nf3 d6 The Philidor Defense</td>
+      <td>1.e4 e5 2.Nf3 d6 − 3...Bg4</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140653769154'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 15:46:46</td>
+      <td>Black</td>
+      <td>Conor433</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 4.d4 Nf6 5.Nf3 #6</td>
+      <td>12</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140653487578'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 15:36:34</td>
+      <td>Black</td>
+      <td>ORudda</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>16) Second Move Alternatives</td>
+      <td>2.Nc3 #1</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140652889830'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 15:19:39</td>
+      <td>White</td>
+      <td>Simones70</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140652656276'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 14:15:06</td>
+      <td>White</td>
+      <td>guri4nto</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>1... b6 with 3...e6</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140650424244'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 13:50:01</td>
+      <td>Black</td>
+      <td>GefenB009</td>
+      <td>win</td>
+      <td>—</td>
+      <td>—</td>
+      <td>—</td>
+      <td>0</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140649332258'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 13:31:37</td>
+      <td>Black</td>
+      <td>GriszaG77</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>33) London System 2.Bf4</td>
+      <td>London System 2.Bf4 c5 3.c3 #1</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140649084406'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 13:22:41</td>
+      <td>White</td>
+      <td>oilmoney010</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140648863870'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 13:09:45</td>
+      <td>White</td>
+      <td>amarok9348</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>9</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140648406502'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 13:01:38</td>
+      <td>Black</td>
+      <td>jeri92</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140647853204'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 12:41:58</td>
+      <td>Black</td>
+      <td>AliK0202</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140647505092'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 12:30:49</td>
+      <td>Black</td>
+      <td>sarori</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>40) 2nd Move Sidelines</td>
+      <td>Sidelines 2.e3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140647248494'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 12:19:34</td>
+      <td>White</td>
+      <td>32o0</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>18. 1.e4 e5 2.Nf3 d6 The Philidor Defense</td>
+      <td>1.e4 e5 2.Nf3 d6 − 3...Bg4</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140646706688'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 12:03:44</td>
+      <td>White</td>
+      <td>TracksFrance</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140646191418'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 03:20:40</td>
+      <td>White</td>
+      <td>Magurinov</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>1... b6 with 3...e6</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140634324226'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 02:45:15</td>
+      <td>Black</td>
+      <td>turkeyistan</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Model Games</td>
+      <td>Demuth, Markus vs. Miroshnichenko, Evgenij (Leros Artemis Cup, 2009)</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140633679064'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 02:36:52</td>
+      <td>White</td>
+      <td>manodechango</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>Italian − 3rd & 4th Move Sidelines #3</td>
+      <td>11</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140633350134'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 02:03:47</td>
+      <td>White</td>
+      <td>anditagntng</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...Nf6 4.d3 d5 #1</td>
+      <td>13</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140632889582'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 01:48:49</td>
+      <td>Black</td>
+      <td>Pop28000</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>3. 1. b3 d5</td>
+      <td>#1</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140632681910'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 01:38:28</td>
+      <td>White</td>
+      <td>Yogendra_Singh</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 e5 2.Nf3 d6 The Philidor Defense #2</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140632428150'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 01:23:04</td>
+      <td>Black</td>
+      <td>horaciomolinari</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 4.d4 Nf6 5.Nf3 #7</td>
+      <td>13</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140632243886'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 01:11:50</td>
+      <td>Black</td>
+      <td>NikAgrChessCub</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>2</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140632185574'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 01:08:27</td>
+      <td>Black</td>
+      <td>monkeyOrMAN</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140631913844'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 00:45:22</td>
+      <td>White</td>
+      <td>aleks-1985</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Philidor 3...Nbd7</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140631664950'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-13 00:36:32</td>
+      <td>White</td>
+      <td>Abubakrrrr1333</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 3...Qe5+ #1</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140631399946'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 21:11:56</td>
+      <td>Black</td>
+      <td>statikdenge</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>6) 5.Bd2 Bg4 (6.Nf3 & 6.Be2)</td>
+      <td>5.Bd2 Bg4 6.Nf3 #1</td>
+      <td>10</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140627357190'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 20:57:18</td>
+      <td>White</td>
+      <td>sero_kndl</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Modern with 3...d6</td>
+      <td>4</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140626723804'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 20:14:29</td>
+      <td>Black</td>
+      <td>AmorePerfectUnion</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>Reti vs. Wannabe Reverse Budapest #1</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140625721496'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 19:59:11</td>
+      <td>White</td>
+      <td>CitizenOfDreams</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Scandinavian with 3...Qd6 #1</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140625348278'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 19:50:48</td>
+      <td>White</td>
+      <td>LjubaOtac</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 2...c6 #1</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140624986818'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 19:37:15</td>
+      <td>Black</td>
+      <td>tresmasdos</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140624793294'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 19:30:47</td>
+      <td>White</td>
+      <td>a76708694gmailcom</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 3...Qe6+</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140624480174'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 19:17:49</td>
+      <td>Black</td>
+      <td>Avinashlonare04</td>
+      <td>win</td>
+      <td>Scandinavian</td>
+      <td>Main Level</td>
+      <td>BD #1</td>
+      <td>8</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140624230628'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 19:05:27</td>
+      <td>Black</td>
+      <td>Oganes20019</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>10) 4.Bc4/d3 Setups</td>
+      <td>4.Bc4 #2</td>
+      <td>13</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140623747506'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 18:54:40</td>
+      <td>White</td>
+      <td>Bestbabboi</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>1. The Italian − Practice Your Move Orders</td>
+      <td>Black doesn't play ...a7-a6 #2</td>
+      <td>13</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140623516530'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 18:45:48</td>
+      <td>White</td>
+      <td>Kostyan904</td>
+      <td>stalemate</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>1</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140623047622'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 18:30:29</td>
+      <td>Black</td>
+      <td>mhddffhhreedg</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>1. g3 #1</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140622710726'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 18:20:03</td>
+      <td>White</td>
+      <td>edobramm</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 3</td>
+      <td>Quickstarter Guide</td>
+      <td>Kan Sicilian</td>
+      <td>8</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140622215680'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 12:05:30</td>
+      <td>Black</td>
+      <td>Thurim_be</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>7) 5.Bd2 Bg4 6.f3 Bd7</td>
+      <td>5.Bd2 Bg4 6.f3 Bd7 7.Bd3 Nc6 8.Nb5</td>
+      <td>14</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140610496306'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 11:34:42</td>
+      <td>White</td>
+      <td>mr-schwab</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 3...Qe6+</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140609570618'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 11:21:46</td>
+      <td>White</td>
+      <td>hitmanns</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>1</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140609201402'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 11:01:13</td>
+      <td>Black</td>
+      <td>JEDOBLACKMON</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140608543604'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 10:26:24</td>
+      <td>Black</td>
+      <td>subodh2002</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>40) 2nd Move Sidelines</td>
+      <td>Sidelines 2.e3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140607647042'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 01:19:53</td>
+      <td>Black</td>
+      <td>jamesgav19</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>33) London System 2.Bf4</td>
+      <td>London System 2.Bf4 c5 3.c3 #1</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140596479944'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-12 01:12:36</td>
+      <td>White</td>
+      <td>felipehenaomarin</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 3</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>8</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140596330454'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 03:24:36</td>
+      <td>Black</td>
+      <td>ulanma</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140561930312'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 03:02:44</td>
+      <td>White</td>
+      <td>DiggityDan4</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>15. Petroff 3.d4 − 3rd Move Sidelines</td>
+      <td>Petroff 3.d4 exd4 #1</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140561495450'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 02:34:16</td>
+      <td>White</td>
+      <td>ciptacat</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 3...Qe5+ #1</td>
+      <td>8</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140561066326'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 02:22:36</td>
+      <td>Black</td>
+      <td>dragonfly340</td>
+      <td>stalemate</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140560755362'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 02:02:09</td>
+      <td>Black</td>
+      <td>phyoewaizae15</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140560433712'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 01:47:35</td>
+      <td>White</td>
+      <td>not_apple1</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Caro-Kann Defense</td>
+      <td>Caro-Kann Advance 3...Bf5 4.Nf3 e6 5.Be2 c5 with 7...Qb6</td>
+      <td>14</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140560395612'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 01:46:10</td>
+      <td>Black</td>
+      <td>gmaster26</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>33) London System 2.Bf4</td>
+      <td>London System 2.Bf4 c5 3.c3 #1</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140560155068'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 01:32:01</td>
+      <td>Black</td>
+      <td>llabonte7</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>16) Second Move Alternatives</td>
+      <td>2.e5 #1</td>
+      <td>5</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140559998540'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 01:23:44</td>
+      <td>White</td>
+      <td>alanKL</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Philidor 3...Nbd7</td>
+      <td>4</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140559708134'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-11 01:05:04</td>
+      <td>Black</td>
+      <td>piyush48722</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.exd5 Qxd5 3.Nc3 Qa5 4.Bc4</td>
+      <td>9</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140559470964'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 22:32:54</td>
+      <td>White</td>
+      <td>ameer1001</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Scandinavian with 3...Qd8</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140556539480'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 21:36:15</td>
+      <td>White</td>
+      <td>Toots09</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...Be7</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140555478824'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 21:33:56</td>
+      <td>Black</td>
+      <td>saivamshi1432</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.d3 dxe4 3.Nc3</td>
+      <td>7</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140555178120'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 21:21:27</td>
+      <td>Black</td>
+      <td>ali137626</td>
+      <td>win</td>
+      <td>Scandinavian</td>
+      <td>Main Level</td>
+      <td>BD #1</td>
+      <td>8</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140554918488'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 20:29:05</td>
+      <td>White</td>
+      <td>akrobatikv2</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>12) Scandinavian: 3...Qa5</td>
+      <td>Scandinavian: 3... Qa5 with 4...c6 #2</td>
+      <td>10</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140553422094'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 04:08:27</td>
+      <td>Black</td>
+      <td>PolysysEG</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>3. 1. b3 d5</td>
+      <td>#1</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140525911436'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 03:51:16</td>
+      <td>White</td>
+      <td>2escac3</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>11) Scandinavian: 3...Qd6 and Early Alternatives</td>
+      <td>Scandinavian with 3...Qe5+ #1</td>
+      <td>8</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140525733986'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 03:42:00</td>
+      <td>Black</td>
+      <td>bxuk38</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140525564372'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 03:32:35</td>
+      <td>Black</td>
+      <td>Meeuwinjetent</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>33) London System 2.Bf4</td>
+      <td>London System 2.Bf4 c5 3.c3 #1</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140525303564'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 03:18:03</td>
+      <td>White</td>
+      <td>Chantspetite</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>1...Nc6 with 2...d6</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140525142652'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 03:09:10</td>
+      <td>White</td>
+      <td>gbliak</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140525030020'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 03:02:55</td>
+      <td>Black</td>
+      <td>Itsjdubz</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>1. g3 #1</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140524780722'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 02:39:18</td>
+      <td>White</td>
+      <td>Maravasco</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>1... b6 with 3...e6</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140524403026'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 02:28:10</td>
+      <td>Black</td>
+      <td>MarcalZz</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140524236900'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 02:18:46</td>
+      <td>White</td>
+      <td>hacuara</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140524141572'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 02:13:34</td>
+      <td>Black</td>
+      <td>heyhey19</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>33) London System 2.Bf4</td>
+      <td>London System 2.Bf4 c5 3.c3 #1</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140523993942'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 02:02:57</td>
+      <td>Black</td>
+      <td>Fisch3r_64</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>40) 2nd Move Sidelines</td>
+      <td>Sidelines 2.e3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140523670940'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 01:46:10</td>
+      <td>Black</td>
+      <td>Drshivaram</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140523590950'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 01:42:43</td>
+      <td>Black</td>
+      <td>Deep252525</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140523540796'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 01:39:54</td>
+      <td>White</td>
+      <td>GuillermoTi</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Quickstarter Guide</td>
+      <td>Italian − 3rd & 4th Move Sidelines #2</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140523379222'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-10 01:27:27</td>
+      <td>White</td>
+      <td>GodUsopp-Sniperking</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140523085990'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-09 03:15:10</td>
+      <td>White</td>
+      <td>alee1518</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140487792850'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-09 02:52:51</td>
+      <td>Black</td>
+      <td>soldametal</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>40) 2nd Move Sidelines</td>
+      <td>Sidelines 2.e3</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140487521848'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-09 02:39:52</td>
+      <td>Black</td>
+      <td>lukeguava</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>10) 4.Bc4/d3 Setups</td>
+      <td>4.Bc4 #1</td>
+      <td>10</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140487422016'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-09 02:35:20</td>
+      <td>White</td>
+      <td>Ubaldo1Mestre</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140487213608'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-09 01:55:58</td>
+      <td>White</td>
+      <td>Madhu954</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>18. 1.e4 e5 2.Nf3 d6 The Philidor Defense</td>
+      <td>1.e4 e5 2.Nf3 d6 − 3...Bg4</td>
+      <td>6</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140486519804'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-09 01:29:00</td>
+      <td>Black</td>
+      <td>RotRottsson</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>37) 2.Nc3 c5</td>
+      <td>2.Nc3 c5 3.Bf4 #1</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140486074060'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 03:22:36</td>
+      <td>Black</td>
+      <td>SanchezHijodeputa</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140413834682'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 03:02:28</td>
+      <td>Black</td>
+      <td>vikiosha1</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>1. g3 #1</td>
+      <td>3</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140413693832'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 02:54:38</td>
+      <td>White</td>
+      <td>vikiosha1</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>1... b6 with 3...e6</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140413605218'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 02:49:35</td>
+      <td>White</td>
+      <td>ErnestoCastilloEs</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>1... b6 with 3...e6</td>
+      <td>7</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140413456562'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 02:40:58</td>
+      <td>Black</td>
+      <td>Lonewolf9727</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.d3 dxe4 3.Nc3</td>
+      <td>7</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140413162920'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 02:24:36</td>
+      <td>Black</td>
+      <td>amitnagpal1234</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Slav</td>
+      <td>Introduction</td>
+      <td>Classical Slav − Introduction</td>
+      <td>1</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140413052778'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 02:18:01</td>
+      <td>White</td>
+      <td>snake2131458675</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>5</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140412763982'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 01:41:27</td>
+      <td>White</td>
+      <td>juanmanuelg1723</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>14. Italian − 3rd & 4th Move Sidelines</td>
+      <td>Italian − 3rd & 4th Move Sidelines − 3...h6</td>
+      <td>9</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140412123526'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 01:25:13</td>
+      <td>Black</td>
+      <td>FL12EA86</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140411896560'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 01:10:23</td>
+      <td>White</td>
+      <td>ExneiderSandoval</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>5. Italiana 6...a6 − 10...Te8</td>
+      <td>Italiana 6...a6 − 10...Te8 − 13...b5 #1</td>
+      <td>3</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140411660852'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 00:55:22</td>
+      <td>Black</td>
+      <td>lancebonds</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Quickstarter Guide</td>
+      <td>1.e4 d5 2.d4</td>
+      <td>4</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140411462054'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 00:41:29</td>
+      <td>Black</td>
+      <td>tj09wood</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140411107878'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 00:26:34</td>
+      <td>Black</td>
+      <td>TRESSSNA</td>
+      <td>resigned</td>
+      <td>Lifetime Repertoires: Scandinavian</td>
+      <td>Introduction</td>
+      <td>Introduction</td>
+      <td>6</td>
+      <td>—</td>
+      <td><a href='https://www.chess.com/game/live/140410975638'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 00:17:42</td>
+      <td>White</td>
+      <td>seraggggggg</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 1</td>
+      <td>19. 1.e4 e5 2.Nf3 − 2nd Move Sidelines</td>
+      <td>1.e4 e5 2.Nf3 f6 #1</td>
+      <td>4</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140410758362'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-07 00:04:33</td>
+      <td>White</td>
+      <td>ErikDV123</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Caro-Kann Defense</td>
+      <td>Caro-Kann Advance: 3...Bf5 4.Nf3 e6 5.Be2 Nd7</td>
+      <td>11</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140410492192'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-06 23:50:39</td>
+      <td>White</td>
+      <td>cheekyboy1221</td>
+      <td>win</td>
+      <td>Lifetime Repertoires: Giri's 1.e4 − Part 2</td>
+      <td>Quickstarter Guide: Other Defenses</td>
+      <td>Philidor 3...Nbd7</td>
+      <td>4</td>
+      <td>You</td>
+      <td><a href='https://www.chess.com/game/live/140410369184'>PGN</a></td>
+    </tr>
+    <tr>
+      <td>2025-07-06 21:34:37</td>
+      <td>Black</td>
+      <td>leyendaasturias</td>
+      <td>checkmated</td>
+      <td>Lifetime Repertoires: Black vs the English, Réti and sidelines</td>
+      <td>2. Random First Moves</td>
+      <td>Reti vs. Wannabe Reverse Budapest #1</td>
+      <td>2</td>
+      <td>Opponent</td>
+      <td><a href='https://www.chess.com/game/live/140407320490'>PGN</a></td>
     </tr>
   
 </tbody>
